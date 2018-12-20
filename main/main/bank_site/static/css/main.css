@@ -1,0 +1,673 @@
+body
+{
+    font-family: SberBank font;
+    font-size: 1.5em;
+    font-weight: lighter;
+    letter-spacing: .6px;
+    margin: 14px;
+    min-width: 980px;
+}
+
+a
+{
+    text-decoration: none;
+    border-bottom: 1px solid #d0e6cb;
+    color: #449d2f;
+}
+
+a:hover
+{
+    color: rgb(243,116,7);
+    border-bottom-color: #fddbc0;
+}
+
+.page-header,
+.menu
+{
+    display: flex;
+}
+
+.header-wrapper
+{
+    margin: auto;
+    display: grid;
+    grid-template: 'name logo' 1fr
+        'links logo' 2fr
+        / 1.6fr 1fr;
+    grid-row-gap: 10px;
+    width: 75%;
+}
+
+.header-comp-name,
+.header-user-name
+{
+    grid-area: name;
+    width: 100%;
+}
+
+.header-links
+{
+    display: flex;
+    grid-area: links;
+    font-size: .6em;
+    flex-wrap: wrap;
+}
+
+.information,
+.requisites
+{
+    width: 100%;
+}
+
+.requisites
+{
+    margin-top: 5px;
+}
+
+.header-logo__img
+{
+    width: 360px;
+    height: 100px;
+    align-self: flex-start;
+}
+
+.header-info
+{
+    display: flex;
+    flex-wrap: wrap;
+    word-spacing: .1em;
+    font-weight: bold;
+}
+
+.links
+{
+    display: flex;
+    width: 100%;
+}
+
+.links__phone,
+.links__site,
+.links__mail
+{
+    margin-right: 25px;
+}
+
+.header-logo
+{
+    display: flex;
+    grid-area: logo;
+}
+
+.links__phone
+{
+    color: gray;
+}
+
+.visible-none
+{
+    display: none;
+}
+
+.pay-section
+{
+    flex-wrap: wrap;
+    display: flex;
+    margin: auto;
+    width: 75%;
+}
+
+.menu
+{
+    width: initial;
+    display: flex;
+    font-size: .8em;
+    margin: 30px 0;
+    box-shadow: 0 3px 4px rgba(105,105,105,0.28);
+}
+
+.pay-button
+{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.get-pay-button
+{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; 
+}
+
+.pay-button,
+.get-pay-button,
+.do-pay-button,
+.our-bank-pay-form__get-file
+{
+    color: white;
+    font-weight: normal;
+    background-color: #2ca63b;
+    background: linear-gradient(to top,#299d37,#2ca63b);
+    border-top: 1px solid #56b862;
+    border-right: 1px solid #248931;
+    border-bottom: 1px solid #1f7629;
+    border-left: 1px solid #50b05c;
+    cursor: pointer;
+    padding: 4px 15px 4px 15px;
+}
+
+.do-pay-button,
+.our-bank-pay-form__get-file
+{
+    outline: none;
+    font-size: 17px;
+    height: 30px;
+    border-radius: 5px;
+    box-shadow: 0 3px 4px rgba(105,105,105,0.28);
+}
+
+.pay-menu,
+.get-pay-menu
+{
+    width: 100%;
+}
+
+.pay-labels
+{
+    display: flex;
+}
+
+.pay-labels img
+{
+    width: 48px;
+    height: 48px;
+    margin-right: 15px;
+}
+
+.pay-labels div:last-child
+{
+    margin-left: 40px;
+}
+
+.menu__pay-label,
+.menu__get-pay-label
+{
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    font-weight: lighter;
+}
+
+.pay-labels__any-bank-label,
+.pay-labels__our-bank-label
+{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: .6em;
+}
+
+.pay-labels__any-bank-label span,
+.pay-labels__our-bank-label span
+{
+    border-bottom: 1px solid #d0e6cb;
+    color: #449d2f;
+}
+
+.color-green
+{
+    color: rgb(68,157,47);
+}
+
+.color-gray
+{
+    color: gray;
+}
+
+.pay-menu,
+.get-pay-menu,
+.any-bank-pay-form,
+.our-bank-pay-form
+{
+    display: none;
+}
+
+input[id="pay-form"]:checked ~ .pay-menu,
+input[id="get-pay-form"]:checked ~ .get-pay-menu,
+input[id="our-bank"]:checked ~ .pay-menu .our-bank-pay-form
+{
+    display: block;
+}
+
+input[id="any-bank"]:checked ~ .pay-menu .any-bank-pay-form
+{
+    display: grid;
+    grid-template-areas: 'card info';
+    grid-auto-columns: max-content;
+    column-gap: 60px; 
+}
+
+.summ-container,
+.comment-container,
+.email-container
+{
+    width: 60%;
+    font-size: .7em;
+    display: flex;
+}
+
+.pay-container__summ,
+.pay-container__comment,
+.pay-container__email
+{
+    width: 400px;
+}
+
+.pay-container__comment
+{
+    grid-area: input-comment;
+}
+
+.pay-container__summ
+{
+    grid-area: input-summ;
+}
+
+.pay-container__email
+{
+    grid-area: input-email;
+}
+
+input[id="pay-form"]:checked ~ .menu .pay-button,
+input[id="get-pay-form"]:checked ~ .menu .get-pay-button
+{
+    background-color: #f5ad24;
+    background: linear-gradient(to top,#f59824,#f5ad24);
+    border-top: 1px solid #f7be4e;
+    border-right: 1px solid #dd8516;
+    border-bottom: 1px solid #bc7122;
+    border-left: 1px solid #f4a223;
+}
+
+input[id="any-bank"]:checked ~ .pay-menu .pay-labels__any-bank-label span,
+input[id="our-bank"]:checked ~ .pay-menu .pay-labels__our-bank-label span
+{
+    color: rgb(243,116,7);
+    border-bottom-color: #fddbc0;
+}
+
+.pay-button:hover,
+.get-pay-button:hover,
+.do-pay-button:hover,
+.our-bank-pay-form__get-file:hover,
+input[id="pay-form"]:checked ~ .menu .pay-button:hover,
+input[id="get-pay-form"]:checked ~ .menu .get-pay-button:hover
+{
+    background-color: #2c7a35;
+    background: linear-gradient(to top,#2c7a35,#2c7a35);
+    border-top: 1px solid #569f5f;
+    border-right: 1px solid #2b7834;
+    border-bottom: 1px solid #2f672f;
+    border-left: 1px solid #2b7834;
+    box-shadow: 0 1px 0 rgba(53,53,53,0.27) inset;
+}
+
+.card-container
+{
+    grid-area: card;
+    padding: 15px 15px;
+    box-sizing: border-box;
+    width: 350px;
+    height: 200px;
+    background-color: rgb(247,247,247);
+    box-shadow: -5px 5px 6px rgba(75, 75, 75, 0.28);
+    border-radius: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"]
+{
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-bottom: 1px solid rgb(206, 206, 206);
+    outline: none;
+    font-size: 15px;
+    padding-left: 6px;
+}
+
+
+input[type="text"]:valid,
+input[type="email"]:valid,
+input[type="number"]:valid
+{
+    border-bottom-color: rgb(68,157,47);
+}
+
+.pay-container
+{
+    grid-area: info;
+    display: grid;
+    grid-template-areas: 'text-summ input-summ'
+            'text-comment input-comment'
+            'text-email input-email'; 
+    flex-wrap: wrap;
+    align-content: space-between;
+    font-size: .7em;
+    grid-column-gap: 30px;
+}
+
+.card-container__number,
+.card-container__date,
+.card-container__cvc
+{
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.pay-container,
+.card-container,
+.our-bank-pay-form__header,
+.our-bank-pay-form__get-file
+{
+    margin-top: 35px;
+}
+
+.card-container__number
+{
+    width: 75%;
+}
+
+.card-container__date,
+.card-container__cvc
+{
+    margin-right: 40px;
+    width: 30%;
+}
+
+input[type="text"]:focus
+{
+    border-bottom: 1px solid rgb(161, 161, 161);
+}
+
+.logo-container
+{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.logo-container__pic
+{
+    width: 150px;
+    height: 40px;
+}
+
+.pay-container__summ-text
+{
+    grid-area: text-summ;
+}
+
+.pay-container__comment-text
+{
+    grid-area: text-comment;
+}
+
+.pay-container__email-text
+{
+    grid-area: text-email;
+}
+
+.about-company
+{
+    margin: auto;
+    width: 75%;
+    display: grid;
+    grid-template-areas: 'name'
+            'products'
+            'info'
+}
+
+.about-company-header
+{
+    margin-top: 60px;
+    font-weight: bold;
+}
+
+.about-company-products
+{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.company-product
+{
+    width: 32%;
+    height: 370px;
+    border: 1px solid rgb(206, 206, 206);
+    box-sizing: border-box;
+    padding: 0 20px 20px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    transition-property: all;
+    transition-duration: .4s;
+    background-color: white;
+    cursor: pointer;
+}
+
+.company-product:hover
+{
+    transform: scale(1.15);
+}
+
+.intro-text
+{
+    margin: 25px 0 15px 0;
+    font-size: .8em;
+}
+
+.company-product__img
+{
+    width: 330px;
+    height: 190px;
+    margin: auto;
+}
+
+.company-product__name
+{
+    font-size: .8em;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.company-product__price
+{
+    align-self: flex-end;
+    font-size: .6em;
+}
+
+.our-bank-grid-wrapper
+{
+    display: grid;
+    grid-template: 'label-payer input-payer'
+            'label-number input-number'
+            'label-cause input-cause'
+            'label-nds input-nds'
+            'label-quantity input-quantity'
+            'label-phone input-phone'
+            'label-email input-email'
+            'submit-button submit-button'
+            'reset-button reset-button'
+            / 1fr 2fr;
+    font-size: .7em;
+    margin-top: 20px;
+    grid-row-gap: 25px;
+}
+
+.our-bank-pay-form__payer-text
+{
+    grid-area: label-payer;
+}
+
+.our-bank-pay-form__number-text
+{
+    grid-area: label-number;
+}
+
+.our-bank-pay-form__cause-text
+{
+    grid-area: label-cause;
+}
+
+.our-bank-pay-form__nds-text
+{
+    grid-area: label-nds;
+}
+
+.our-bank-pay-form__quantity-text
+{
+    grid-area: label-quantity;
+}
+
+.our-bank-pay-form__payer
+{
+    grid-area: input-payer;
+}
+
+.our-bank-pay-form__number
+{
+    grid-area: input-number;
+}
+
+.our-bank-pay-form__cause
+{
+    grid-area: input-cause;
+}
+
+.our-bank-pay-form__nds
+{
+    grid-area: input-nds;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.our-bank-pay-form__quantity
+{
+    grid-area: input-quantity;
+}
+
+.our-bank-pay-form__phone-text
+{
+    grid-area: label-phone;
+}
+
+.our-bank-pay-form__phone
+{
+    grid-area: input-phone;
+}
+
+.our-bank-pay-form__email-text
+{
+    grid-area: label-email;
+}
+
+.our-bank-pay-form__email
+{
+    grid-area: input-email;
+}
+
+.our-bank-pay-form__header,
+.our-get-bank-pay-form__header
+{
+    font-size: .7em;
+    margin-bottom: 20px;
+}
+
+.our-bank-grid-wrapper > span
+{
+    color: gray;
+}
+
+.nds-form-input-container__input
+{
+    width: 100%;
+    pointer-events: none;
+}
+
+.nds-form-input-container
+{
+    width: 100%;
+}
+
+.nds-label
+{
+    margin-right: 10px;
+    font-size: .8em;
+    color: gray;
+    cursor: pointer;
+}
+
+input[id="18-nds-input"]:checked ~ .our-bank-pay-form__nds .nds-form-input-container::before,
+input[id="18-get-nds-input"]:checked ~ .our-bank-pay-form__nds .nds-form-input-container::before
+{
+    content: "18%";
+    position: absolute;
+    padding-left: 6px;
+}
+
+input[id="20-nds-input"]:checked ~ .our-bank-pay-form__nds .nds-form-input-container::before,
+input[id="20-get-nds-input"]:checked ~ .our-bank-pay-form__nds .nds-form-input-container::before
+{
+    content: "20%";
+    position: absolute;
+    padding-left: 6px;
+}
+
+input[id="none-nds-input"]:checked ~ .our-bank-pay-form__nds .nds-form-input-container::before,
+input[id="none-get-nds-input"]:checked ~ .our-bank-pay-form__nds .nds-form-input-container::before
+{
+    content: "Без НДС";
+    position: absolute;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+input[id="18-nds-input"]:checked ~ .our-bank-pay-form__nds label[for="18-nds-input"],
+input[id="20-nds-input"]:checked ~ .our-bank-pay-form__nds label[for="20-nds-input"],
+input[id="none-nds-input"]:checked ~ .our-bank-pay-form__nds label[for="none-nds-input"],
+input[id="18-get-nds-input"]:checked ~ .our-bank-pay-form__nds label[for="18-get-nds-input"],
+input[id="20-get-nds-input"]:checked ~ .our-bank-pay-form__nds label[for="20-get-nds-input"],
+input[id="none-get-nds-input"]:checked ~ .our-bank-pay-form__nds label[for="none-get-nds-input"]
+{
+    color: #449d2f;
+}
+
+.our-bank-pay-form__get-file
+{
+    grid-area: submit-button;
+    width: max-content;
+}
+
+.our-bank-pay-form__clear-form
+{
+    margin-top: 10px;
+    grid-area: reset-button;
+    width: max-content;
+    background: none;
+    border: none;
+    color: #449d2f;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.our-bank-pay-form__clear-form:hover
+{
+    color: rgb(243,116,7);
+}
+
+.about-company-info
+{
+    width: 100%;
+    font-size: .7em;
+}

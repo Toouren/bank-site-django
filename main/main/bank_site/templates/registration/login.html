@@ -1,0 +1,39 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        @font-face
+        {
+            font-family: SberBank font;
+            src: url("{% static 'fonts/FedraSansPro-Light.otf' %}");
+            font-style: normal;
+            font-weight: 200;
+        }
+
+        @font-face
+        {
+            font-family: SberBank font;
+            src: url("{% static 'fonts/FedraSansPro-Bold.otf' %}");
+            font-style: normal;
+            font-display: bold;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="login-container">
+            <div class="header-logo">
+                <img class="header-logo__img" src="{% static 'img/logo.svg' %}" alt="Логотип">
+            </div>
+            <form class="login-form">
+                <input type="text" maxlength="20" placeholder="Логин" class="login-form__input" required>
+                <input type="password" placeholder="Пароль" class="login-form__input" required>
+                <input type="submit" value="Войти" class="login-form__submit-input">
+            </form>
+        </div>
+    </main>
+</body>
+</html>
