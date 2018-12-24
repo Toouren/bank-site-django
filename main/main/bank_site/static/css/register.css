@@ -1,0 +1,173 @@
+a
+{
+    text-decoration: none;
+    border-bottom: 1px solid #d0e6cb;
+    color: #449d2f;
+}
+
+a:hover
+{
+    color: rgb(243,116,7);
+    border-bottom-color: #fddbc0;
+}
+
+.register-main
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.registration-container,
+.wrong-info
+{
+    margin: auto;
+    width: 500px;
+    height: 530px;
+    background: linear-gradient(to bottom,#fff 0%,#f3f3f3 100%);
+    border-radius: 10px;
+    box-shadow: 0.65em 0.65em 1.75em -0.25em rgba(0,0,0,0.25), 0 0 1px 0 rgba(157,186,165,0.5), 0 2px 0px 0px rgba(157,186,165,0.85);
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+    font: 14px/1 seroCompPro,'Trebuchet MS',sans-serif;
+}
+
+.register-form
+{
+    margin: 15px;
+}
+
+.company-header-container__text,
+.header-container__text
+{
+    font-size: 16px;
+    align-self: center;
+}
+
+.company-header-container,
+.header-container,
+.product
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-logo__img
+{
+    width: 150px;
+}
+
+.comp-wrapper,
+.user-wrapper
+{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.company-products-input-container
+{
+    margin-top: 30px;
+}
+
+.login-form__submit-input
+{
+    margin-top: 50px;
+}
+
+.comp-input
+{
+    width: 50%;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: .35em .6875em .35em;
+    outline: 0;
+    border: .075em solid #d4d4d4;
+    transition: box-shadow .25s,border-color .25s;
+}
+
+.comp-input:hover
+{
+    border-color: #ffe44d;
+}
+
+.comp-input:focus
+{
+    border: .15em solid #ffd21c;
+    box-shadow: 0 0 1em 0.1em rgba(255,222,39,0.25);
+}
+
+.info-input
+{
+    width: 100%;
+    resize: none;
+}
+
+.register-form__submit-input,
+.comp-register-form__submit-input
+{
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    background-image: linear-gradient(to bottom,#f0a800 0%,#e69c00 100%);
+    padding: 0.55em 0 0.5em;
+    font-size: 1.125em;
+    outline: none;
+    color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0.1em 0.1em 0 rgba(0,0,0,0.25), inset -1px -1px 1px 0 rgba(52,35,0,0.2);
+    cursor: pointer;
+}
+
+.register-form__submit-input:hover
+{
+    background-image: linear-gradient(to bottom,#ffb916 0%,#f7a903 100%);
+}
+
+.register-form__submit-input:active
+{
+    background-image: linear-gradient(to bottom,#e89900 0%,#d88a00 100%);
+}
+
+.product
+{
+    margin-top: 7px;
+}
+
+.good-input
+{
+    outline: none;
+    cursor: pointer;
+}
+
+.wrong-info
+{
+    height: 100px;
+    width: 500px;
+    padding: 3em 0;
+    position: absolute;
+    top: calc(50% + 280px);
+    left: calc(50% - 250px);
+}
+
+.wrong-info__access-denied-text
+{
+    color: #cf0000;
+    font-size: 1.2em;
+}
+
+.label-for-inp
+{
+    align-self: center;
+}
+
+.register-form__submit-input
+{
+    margin-top: 70px;
+}
+
+.header-container
+{
+    margin-bottom: 80px;
+}

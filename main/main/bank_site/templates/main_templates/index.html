@@ -23,20 +23,32 @@
     </style>
 </head>
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="{% static 'js_scripts/jquery.mask.js' %}"></script>
+    <script src="{% static 'js_scripts/btn-check.js' %}"></script>
+    <script src="{% static 'js_scripts/input-masks.js' %}"></script>
     <header class="page-header">
         <div class="header-wrapper">
             <div class="header-info">
                 <div class="header-comp-name">Индивидуальный предприниматель</div>
-                <div class="header-user-name">Швецова Мария Валерьевна</div>
+                <div class="header-user-name">{{ second_name }} {{ first_name }}</div>
             </div>
             <div class="header-links">
                 <div class="links">
-                    <div class="links__phone">+78005553535</div>
-                    <div class="links__site"><a href="#">www.mary.com</a></div>
-                    <div class="links__mail"><a href="#">mary@sberbank.com</a></div>
+                    {% if phone_number != "number_is_not_set" %}
+                    <div class="links__phone">{{ phone_number }}</div>
+                    {% endif %}
+                    {% if comp_site != "site_is_not_set" %}
+                    <div class="links__site"><a href="{{ comp_site }}">{{ comp_site }}</a></div>
+                    {% endif %}
+                    {% if email != "email_is_not_set" %}
+                    <div class="links__mail"><a href="{{ email }}">{{ email }}</a></div>
+                    {% endif %}
                 </div>
                 <div class="information"><a href="#">Информация о компании</a></div>
                 <div class="requisites"><a href="#">Показать реквизиты</a></div>
+                <div class="exit-but"><a href="/logout">Выйти</a></div>
             </div>
             <div class="header-logo">
                 <img class="header-logo__img" src="{% static 'img/logo.svg' %}" alt="Логотип">
@@ -60,56 +72,57 @@
             <div class="pay-labels">
                 <div>
                     <label for="any-bank" class="pay-labels__any-bank-label">
-                        <img src="img/any-bank-pay.jpg"><span>С карты любого банка</span>
+                        <img src="{% static 'img/any-bank-pay.jpg' %}"><span>С карты любого банка</span>
                     </label>
                 </div>
                 <div>
                     <label for="our-bank" class="pay-labels__our-bank-label">
-                        <img src="img/our-bank-pay.jpg"><span>Из своего интернет-банка</span>
+                        <img src="{% static 'img/our-bank-pay.jpg' %}"><span>Из своего интернет-банка</span>
                     </label>
                 </div>
             </div>
-            <div class="any-bank-pay-form">
+            <form id="card-pay-form" class="any-bank-pay-form" method="post" action="/">
+                {% csrf_token %}
                 <div class="card-container">
                     <div class="logo-container">
-                        <img class="logo-container__pic" src="img/visamastermaestro.png">
+                        <img class="logo-container__pic" src="{% static 'img/visamastermaestro.png' %}">
                     </div>
-                    <input type="text" class="card-container__number" placeholder="Номер карты" 
-                        pattern="[0-9]{16}" required title="1234567891234567">
-                    <input type="text" class="card-container__date" placeholder="ММ/ГГ"
+                    <input name="number" type="text" class="card-container__number" placeholder="Номер карты" 
+                        pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" required title="1234-5678-9123-4567">
+                    <input name="date" type="text" class="card-container__date" placeholder="ММ/ГГ"
                         pattern="[0-9]{2}/[0-9]{2}" required title="12/12">
-                    <input type="text" class="card-container__cvc" placeholder="CVC"
+                    <input name="cvc" type="text" class="card-container__cvc" placeholder="CVC"
                         pattern="[0-9]{3}" required title="123">
                 </div>
                 <div class="pay-container">
                     <span class="pay-container__summ-text">Сумма</span>
-                    <input type="number" min="1000" max="75000" class="pay-container__summ"
+                    <input name="sum" type="number" min="1000" max="75000" class="pay-container__summ"
                         placeholder="От 1000 до 75000" required>
                     <span class="pay-container__comment-text">Комментарий</span>
-                    <input type="text" class="pay-container__comment" maxlength="150" required placeholder="До 150 символов">
+                    <input name="comment" type="text" class="pay-container__comment" maxlength="150" required placeholder="До 150 символов">
                     <span class="pay-container__email-text">Ваша эл.почта</span>
-                    <input type="email" required class="pay-container__email" placeholder="Для квитанций об оплате">
-                    <button class="do-pay-button">
-                        <span clas="do-pay-button__text">Заплатить</span>
-                    </button>
+                    <input name="email" type="email" required class="pay-container__email" placeholder="Для квитанций об оплате">
+                    <input id="card-pay" type="submit" name="card-pay" class="do-pay-button" value="Заплатить" disabled="disabled">
                 </div>
-            </div>
+            </form>
             <div class="our-bank-pay-form">
                 <div class="our-bank-pay-form__header">Сформируйте платёжку и загрузите
                     её в свой банк для подписи</div>
-                <form class="our-bank-grid-wrapper" target="_blank">
+                <form id="our-bank-form" class="our-bank-grid-wrapper" method="get" action="/">
+                    {% csrf_token %}
                     <span class="our-bank-pay-form__payer-text">От кого</span>
-                    <input type="text" class="our-bank-pay-form__payer" placeholder="ИНН или название плательщика"
+                    <input name="our_payer" type="text" class="our-bank-pay-form__payer" placeholder="ИНН плательщика"
                         pattern="[0-9]{10}|[0-9]{12}" title="123456789123" required>
                     <span class="our-bank-pay-form__number-text">БИК</span>
-                    <input type="text" class="our-bank-pay-form__number" placeholder="Банковский идентификационный код"
+                    <input name="our_bik" type="text" class="our-bank-pay-form__number" placeholder="Банковский идентификационный код"
                         pattern="[0-9]{9}" title="123456789" required>
                     <span class="our-bank-pay-form__cause-text">За что</span>
-                    <input type="text" class="our-bank-pay-form__cause" placeholder="Назначение платежа" required>
+                    <input name="our_comment" type="text" class="our-bank-pay-form__cause"
+                           placeholder="Максимум 150 символов" required>
                     
-                    <input type="radio" id="18-nds-input" class="visible-none" name="nds-input" checked>
-                    <input type="radio" id="20-nds-input" class="visible-none" name="nds-input">
-                    <input type="radio" id="none-nds-input" class="visible-none" name="nds-input">
+                    <input type="radio" id="18-nds-input" class="visible-none" name="nds_input" value="18" checked>
+                    <input type="radio" id="20-nds-input" class="visible-none" name="nds_input" value="20">
+                    <input type="radio" id="none-nds-input" class="visible-none" name="nds_input" value="0">
                     
                     <span class="our-bank-pay-form__nds-text">НДС</span>
                     <div class="our-bank-pay-form__nds">
@@ -122,10 +135,11 @@
                         <label class="nds-label" for="none-nds-input">Без НДС</label>
                     </div>
                     <span class="our-bank-pay-form__quantity-text">Сколько</span>
-                    <input type="number" min="1000" max="75000" class="our-bank-pay-form__quantity"
+                    <input name="our_sum" type="number" min="1000" max="75000" class="our-bank-pay-form__quantity"
                         required title="Сумма должна быть от 1000 до 75000">
-                    <input type="submit" value="Получить файл для интернет-банка" class="our-bank-pay-form__get-file"></input>
-                    <input type="reset" class="our-bank-pay-form__clear-form"></input>
+                    <input id="our-bank-pay" name="our-bank-pay" type="submit"
+                           value="Получить файл для интернет-банка" class="our-bank-pay-form__get-file">
+                    <input type="reset" class="our-bank-pay-form__clear-form">
                 </form>
             </div>
         </div>
@@ -133,20 +147,21 @@
             <div class="get-pay-form">
                 <div class="our-get-bank-pay-form__header">Сформируйте платёжку и отправте
                     её в интернет-банк получателя для подписи</div>
-                <form class="our-bank-grid-wrapper" target="_blank">
+                <form id="get-form" class="our-bank-grid-wrapper" action="/" method="post">
+                    {% csrf_token %}
                     <span class="our-bank-pay-form__payer-text">От кого</span>
-                    <input type="text" class="our-bank-pay-form__payer" placeholder="ИНН или название плательщика"
+                    <input name="get_requester" type="text" class="our-bank-pay-form__payer" placeholder="ИНН плательщика"
                         pattern="[0-9]{10}|[0-9]{12}" title="123456789123" required>
                     <span class="our-bank-pay-form__number-text">БИК получателя</span>
-                    <input type="text" class="our-bank-pay-form__number" placeholder="Номер БИК"
+                    <input name="get_bik" type="text" class="our-bank-pay-form__number" placeholder="Номер БИК"
                         pattern="[0-9]{9}" title="123456789" required>
                     <span class="our-bank-pay-form__cause-text">За что</span>
-                    <input type="text" class="our-bank-pay-form__cause" required
-                        placeholder="Назначение платежа">
+                    <input name="get_comment" type="text" class="our-bank-pay-form__cause" required
+                        placeholder="Максимум 150 символов">
                     
-                    <input type="radio" id="18-get-nds-input" class="visible-none" name="nds-input" checked>
-                    <input type="radio" id="20-get-nds-input" class="visible-none" name="nds-input">
-                    <input type="radio" id="none-get-nds-input" class="visible-none" name="nds-input">
+                    <input value="18" type="radio" id="18-get-nds-input" class="visible-none" name="nds_input" checked>
+                    <input value="20" type="radio" id="20-get-nds-input" class="visible-none" name="nds_input">
+                    <input value="0" type="radio" id="none-get-nds-input" class="visible-none" name="nds_input">
                     
                     <span class="our-bank-pay-form__nds-text">НДС</span>
                     <div class="our-bank-pay-form__nds">
@@ -159,49 +174,44 @@
                         <label class="nds-label" for="none-get-nds-input">Без НДС</label>
                     </div>
                     <span class="our-bank-pay-form__quantity-text">Сколько</span>
-                    <input type="number" class="our-bank-pay-form__quantity" min="1000" max="75000" required>
+                    <input name="get_sum" type="number" class="our-bank-pay-form__quantity" min="1000" max="75000" required>
                     <span class="our-bank-pay-form__phone-text">Номер телефона</span>
-                    <input type="text" class="our-bank-pay-form__phone" pattern="+([0-9]{3})[0-9]{3} [0-9]{2} [0-9]{2}" 
-                        required placeholder="+7(123)123 12 12">
+                    <input name="get_phone" type="text" class="our-bank-pay-form__phone"
+                           pattern="+[0-9]([0-9]{3})[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                           required placeholder="+7(123)123-12-12">
                     <span class="our-bank-pay-form__email-text">Почта</span>
-                    <input type="email" class="our-bank-pay-form__email" required>
-                    <input type="submit" value="Отправить файл" class="our-bank-pay-form__get-file"></input>
-                    <input type="reset" class="our-bank-pay-form__clear-form"></input>
+                    <input name="get_email" type="email" class="our-bank-pay-form__email" required>
+                    <input id="get-bank-pay" name="get-bank-pay" type="submit" value="Отправить файл" class="our-bank-pay-form__get-file">
+                    <input type="reset" class="our-bank-pay-form__clear-form">
                 </form>
             </div>
         </div>
     </section>
     <section class="about-company">
         <div class="about-company-header">
-            <div class="header-comp-name">O компании Индивидуальный предприниматель</div>
-            <div class="header-user-name">Швецова Мария Валерьевна</div>
+            <div class="header-comp-name">O компании {{ comp_name }}</div>
         </div>
         <div class="intro-text">Товары и услуги:</div>
         <div class="about-company-products">
             <div class="company-product">
-                <img class="company-product__img" alt="Фото продукта" src="img/moyka-premium.jpg">
-                <div class="company-product__name">Мойка «Премиум»</div>
-                <div class="company-product__price color-gray">1700 руб.</div>
+                <img class="company-product__img" alt="Фото продукта" src="{{ comp_first_pic.url }}">
+                <div class="company-product__name">{{ comp_first_name }}</div>
+                <div class="company-product__price color-gray">{{ comp_first_cost }} руб.</div>
             </div>
             <div class="company-product">
-                <img class="company-product__img" alt="Фото продукта" src="img/him-wash.jpg">
-                <div class="company-product__name">Химчистка салона автомобиля</div>
-                <div class="company-product__price color-gray">6000 руб.</div>
+                <img class="company-product__img" alt="Фото продукта" src="{{ comp_second_pic.url }}">
+                <div class="company-product__name">{{ comp_second_name }}</div>
+                <div class="company-product__price color-gray">{{ comp_second_cost }} руб.</div>
             </div>
             <div class="company-product">
-                <img class="company-product__img" alt="Фото продукта" src="img/polirovka.jpg">
-                <div class="company-product__name">	Комплексная полировка кузова</div>
-                <div class="company-product__price color-gray">8900 руб.</div>
+                <img class="company-product__img" alt="Фото продукта" src="{{ comp_third_pic.url }}">
+                <div class="company-product__name">{{ comp_third_name }}</div>
+                <div class="company-product__price color-gray">{{ comp_third_cost }} руб.</div>
             </div>
         </div>
         <div class="intro-text">Описание:</div>
         <div class="about-company-info">
-                «Мойка автомобилей 2Х2» c 2009 года оказывает профессиональные услуги
-                по очистке и защите от грязи Ваших автомобилей.Мы постоянно улучшаем качество оказываемых
-                услуг и готовы выслушать ваши отзывы и предложения. Ни одно обращение не
-                останется без внимания! Не важно какой день недели, не важно сколько времени на часах.
-                Наши автомойки работают 24 часа в сутки без выходных! Вы можете забронировать
-                удобное для вас время по телефону + 7 (812) 309-7-100 или же онлайн через сайт.                
+                {{ comp_info }}
         </div>
     </section>
     <footer>

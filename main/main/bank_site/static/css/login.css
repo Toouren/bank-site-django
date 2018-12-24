@@ -1,4 +1,10 @@
-.login-container
+.login-form
+{
+    margin-block-end: 0;
+}
+
+.login-container,
+.wrong-info
 {
     height: 310px;
     width: 280px;
@@ -16,6 +22,7 @@ main
     display: flex;
     width: 100%;
     height: 100%;
+    font: 14px/1 seroCompPro,'Trebuchet MS',sans-serif;
 }
 
 .login-form__input
@@ -32,9 +39,9 @@ main
     transition: box-shadow .25s,border-color .25s;
 }
 
-.login-form__submit-input
+.login-form__submit-input,
+.registration-container
 {
-    border: none;
     text-align: center;
     margin-top: 40px;
     width: 100%;
@@ -48,12 +55,19 @@ main
     cursor: pointer;
 }
 
-.login-form__submit-input:hover
+.registration-container
+{
+    margin-top: 10px;
+}
+
+.login-form__submit-input:hover,
+.registration-container:hover
 {
     background-image: linear-gradient(to bottom,#ffb916 0%,#f7a903 100%);
 }
 
-.login-form__submit-input:active
+.login-form__submit-input:active,
+.registration-container:active
 {
     background-image: linear-gradient(to bottom,#e89900 0%,#d88a00 100%);
 }
@@ -67,4 +81,21 @@ main
 {
     border: .15em solid #ffd21c;
     box-shadow: 0 0 1em 0.1em rgba(255,222,39,0.25);
+}
+
+.wrong-info
+{
+    height: 150px;
+    width: 280px;
+    padding: 3em 0;
+    position: absolute;
+    top: calc(50% + 165px);
+    left: calc(50% - 140px);
+}
+
+.wrong-info__access-denied-text
+{
+    color: #cf0000;
+    font-size: 1.2em;
+    margin-bottom: 10px;
 }

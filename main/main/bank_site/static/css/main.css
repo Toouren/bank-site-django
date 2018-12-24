@@ -1,3 +1,4 @@
+
 body
 {
     font-family: SberBank font;
@@ -5,7 +6,7 @@ body
     font-weight: lighter;
     letter-spacing: .6px;
     margin: 14px;
-    min-width: 980px;
+    min-width: 570px;
 }
 
 a
@@ -34,6 +35,7 @@ a:hover
     grid-template: 'name logo' 1fr
         'links logo' 2fr
         / 1.6fr 1fr;
+    
     grid-row-gap: 10px;
     width: 75%;
 }
@@ -54,13 +56,10 @@ a:hover
 }
 
 .information,
-.requisites
+.requisites,
+.exit-but
 {
     width: 100%;
-}
-
-.requisites
-{
     margin-top: 5px;
 }
 
@@ -142,21 +141,25 @@ a:hover
 .do-pay-button,
 .our-bank-pay-form__get-file
 {
+    font-family: SberBank font;
+    font-weight: lighter;
     color: white;
-    font-weight: normal;
     background-color: #2ca63b;
     background: linear-gradient(to top,#299d37,#2ca63b);
     border-top: 1px solid #56b862;
     border-right: 1px solid #248931;
     border-bottom: 1px solid #1f7629;
     border-left: 1px solid #50b05c;
-    cursor: pointer;
+    cursor: default;
     padding: 4px 15px 4px 15px;
 }
 
 .do-pay-button,
 .our-bank-pay-form__get-file
 {
+    transition: all;
+    transition-duration: .4s;
+    opacity: .6;
     outline: none;
     font-size: 17px;
     height: 30px;
@@ -468,8 +471,8 @@ input[type="text"]:focus
 
 .company-product__img
 {
-    width: 330px;
-    height: 190px;
+    width: 100%;
+    height: 180px;
     margin: auto;
 }
 
@@ -651,6 +654,7 @@ input[id="none-get-nds-input"]:checked ~ .our-bank-pay-form__nds label[for="none
 
 .our-bank-pay-form__clear-form
 {
+    outline: none;
     margin-top: 10px;
     grid-area: reset-button;
     width: max-content;
@@ -670,4 +674,117 @@ input[id="none-get-nds-input"]:checked ~ .our-bank-pay-form__nds label[for="none
 {
     width: 100%;
     font-size: .7em;
+}
+
+@media screen and (max-width: 768px)
+{
+    body
+    {
+        font-size: 1.25em;
+    }
+
+    .header-wrapper
+    {
+        grid-template: 'name' 1fr
+            'links' 2fr
+            'logo' 2fr;
+    }
+
+    .pay-labels
+    {
+        flex-wrap: wrap;
+        width: 300px;
+    }
+
+    .pay-labels__any-bank-label,
+    .pay-labels__our-bank-label
+    {
+        width: 100%;
+    }
+
+    .pay-labels div:last-child
+    {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    input[id="any-bank"]:checked ~ .pay-menu .any-bank-pay-form
+    {
+        grid-template-areas: 'card' 'info';
+    }
+
+    .pay-container__summ,
+    .pay-container__comment,
+    .pay-container__email
+    {
+        width: 250px;
+    }
+
+    .about-company-products
+    {
+        flex-wrap: wrap;
+    }
+    
+    .about-company-products
+    {
+        display: block;
+        text-align: center;
+    }
+
+    .company-product__img
+    {
+        height: 150px;
+    }
+
+    .company-product
+    {
+        margin-bottom: 10px;
+        width: 60%;
+        height: 300px;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+
+    .company-product:hover
+    {
+        transform: none;
+    }
+
+    .about-company-info
+    {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 570px)
+{
+    body
+    {
+        font-size: 1.4em;
+    }
+
+    .pay-container__summ,
+    .pay-container__comment,
+    .pay-container__email
+    {
+        width: 250px;
+    }
+
+    .company-product__img
+    {
+        height: 130px;
+    }
+    
+    .about-company-info
+    {
+        width: 350px;
+    }
+
+    .company-product
+    {
+        width: 60%;
+        height: 250px;
+        margin: auto;
+        margin-bottom: 10px;
+    }
 }

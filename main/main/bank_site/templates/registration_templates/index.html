@@ -1,0 +1,83 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <style>
+        @font-face
+        {
+            font-family: SberBank font;
+            src: url("{% static 'fonts/FedraSansPro-Light.otf' %}");
+            font-style: normal;
+            font-weight: 200;
+        }
+
+        @font-face
+        {
+            font-family: SberBank font;
+            src: url("{% static 'fonts/FedraSansPro-Bold.otf' %}");
+            font-style: normal;
+            font-display: bold;
+        }
+    </style>
+</head>
+<body>
+    <main class="register-main">
+        <div class="registration-container">
+            <form id="reg-form" class="register-form" method="post" action="/register">
+                {% csrf_token %}
+                <div class="company-header-container">
+                    <div class="company-header-container__text">Заполните данные о вашей компании</div>
+                    <div class="header-logo">
+                        <img class="header-logo__img" src="{% static 'img/logo.svg' %}" alt="Логотип">
+                    </div>
+                </div>
+                <div class="comp-wrapper">
+                    <label class="label-for-inp" for="company-name-input">Название компании</label>
+                    <input name="comp-name" id="company-name-input" type="text" maxlength="100" placeholder="Название компании" class="comp-input" required>
+                </div>
+                <div class="comp-wrapper">
+                    <label class="label-for-inp" for="company-site-input">Сайт компании</label>
+                    <input name="comp-site" id="company-site-input" type="text" maxlength="300" placeholder="URL сайта" class="comp-input">
+                </div>
+                <div class="comp-wrapper">
+                    <label for="company-info-input">Информация о компании:</label>
+                </div>
+                <div class="comp-wrapper">
+                    <textarea name="comp-info" form="reg-form" id="company-info-input" type="text"
+                        rows="8" maxlength="1000" class="comp-input info-input" required></textarea>
+                </div>
+                <div class="company-products-input-container">
+                    <div>Выбирите 3 фотографии наиболее популярных услуг(товаров) вашей компании,
+                        установите их стоимость и название</div>
+                    <div class="product">
+                        <input name="first-pic" id="company-first-pic-input" type="file" class="good-input" required>
+                        <input name="first-cost" id="first-cost-input" type="text" class="comp-input" placeholder="Цена" required>
+                        <input name="first-name" id="first-name-input" type="text" class="comp-input" placeholder="Название" required>
+                    </div>
+                    <div class="product">
+                        <input name="second-pic" id="company-second-pic-input" type="file" class="good-input" required>
+                        <input name="second-cost" id="second-cost-input" type="text" class="comp-input" placeholder="Цена" required>
+                        <input name="second-name" id="second-name-input" type="text" class="comp-input" placeholder="Название" required>
+                    </div>
+                    <div class="product">
+                        <input name="third-pic" id="company-third-pic-input" type="file" class="good-input" required>
+                        <input name="third-cost" id="third-cost-input" type="text" class="comp-input" placeholder="Цена" required>
+                        <input name="third-name" id="third-name-input" type="text" class="comp-input" placeholder="Название" required>
+                    </div>
+                </div>
+                <input type="submit" value="Зарегистрировать компанию" class="comp-register-form__submit-input">
+            </form>
+            <div>Уже зарегистрировали компанию? <a href="register/user">Перейдите</a> к регистрации пользователя или
+                ко <a href="login">входу</a> в систему</div>
+            {% if error %}
+            <div class="wrong-info">
+                <div class="wrong-info__access-denied-text">В регистрации отказано</div>
+                <div class="wrong-info__explain-text">Компания уже зарегистрирована</div>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>

@@ -28,12 +28,21 @@
             <div class="header-logo">
                 <img class="header-logo__img" src="{% static 'img/logo.svg' %}" alt="Логотип">
             </div>
-            <form class="login-form" method="post" action="{% url 'login' %}">
-                <input type="text" maxlength="20" placeholder="Логин" class="login-form__input" required>
-                <input type="password" placeholder="Пароль" class="login-form__input" required>
+            <form class="login-form" method="post" action="/login">
+                {% csrf_token %}
+                <input type="text" name="username" maxlength="20" placeholder="Логин" class="login-form__input" required>
+                <input type="password" name="password" placeholder="Пароль" class="login-form__input" required>
                 <input type="submit" value="Войти" class="login-form__submit-input">
             </form>
+            <input class="registration-container" type="button" value="Зарегистрироваться"
+                   onclick="window.location.href='/register'">
         </div>
+        {% if error %}
+            <div class="wrong-info">
+                <div class="wrong-info__access-denied-text">Во входе отказано</div>
+                <div class="wrong-info__explain-text">Неверный логин или пароль</div>
+            </div>
+        {% endif %}
     </main>
 </body>
 </html>

@@ -1,0 +1,59 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    <main class="register-main">
+        <div class="registration-container">
+            <form id="reg-form" class="register-form" method="post" action="/register/user">
+                {% csrf_token %}
+                <div class="header-container">
+                    <div class="header-container__text">Заполните данные о себе</div>
+                    <div class="header-logo">
+                        <img class="header-logo__img" src="{% static 'img/logo.svg' %}" alt="Логотип">
+                    </div>
+                </div>
+                <div class="user-wrapper">
+                    <label class="label-for-inp" for="login-input">Логин</label>
+                    <input name="login" id="login-input" type="text" maxlength="100" class="comp-input" required>
+                </div>
+                <div class="user-wrapper">
+                    <label class="label-for-inp" for="name-input">Имя</label>
+                    <input name="name" id="name-input" type="text" maxlength="100" class="comp-input" required>
+                </div>
+                <div class="user-wrapper">
+                    <label class="label-for-inp" for="second-name-input">Фамилия</label>
+                    <input name="second-name" id="second-name-input" type="text" maxlength="300" class="comp-input">
+                </div>
+                <div class="user-wrapper">
+                    <label class="label-for-inp" for="comp-name-input">Название компании</label>
+                    <input name="comp-name" id="comp-name-input" type="text" maxlength="300" class="comp-input">
+                </div>
+                <div class="user-wrapper">
+                    <label class="label-for-inp" for="phone-input">Номер телефона</label>
+                    <input name="phone" id="phone-input" type="text" maxlength="300" class="comp-input">
+                </div>
+                <div class="user-wrapper">
+                    <label class="label-for-inp" for="email-input">Электронная почта</label>
+                    <input name="email" id="email-input" type="email" maxlength="300" class="comp-input">
+                </div>
+                <div class="user-wrapper">
+                    <label class="label-for-inp" for="pass-input">Пароль</label>
+                    <input name="pass" id="pass-input" type="password" maxlength="300" class="comp-input">
+                </div>
+                <input type="submit" value="Зарегистрировать пользователя" class="register-form__submit-input">
+            </form>
+            <div>Уже зарегистрировали компанию и пользователя? <a href="/login">Перейдите</a> ко входу в систему</div>
+            {% if error %}
+            <div class="wrong-info">
+                <div class="wrong-info__access-denied-text">В регистрации отказано</div>
+                <div class="wrong-info__explain-text">У компании уже зарегистрирован владелец</div>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
