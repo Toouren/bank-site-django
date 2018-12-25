@@ -48,6 +48,9 @@
                 </div>
                 <div class="information"><a href="#">Информация о компании</a></div>
                 <div class="requisites"><a href="#">Показать реквизиты</a></div>
+                {% if superuser == 1 %}
+                    <div class="moder-but"><a href="/moderator">Список платежей</a></div>
+                {% endif %}
                 <div class="exit-but"><a href="/logout">Выйти</a></div>
             </div>
             <div class="header-logo">

@@ -1,0 +1,110 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/moder.css' %}">
+</head>
+<body>
+    <header class="moder-header">
+        <span class="moder-header__text">Добрый день, {{ moder_name }}</span>
+    </header>
+    <main class="moder-main">
+        <input class="visible-none" type="radio" id="card-trans" name="menu-input" checked>
+        <input class="visible-none" type="radio" id="internet-bank-trans" name="menu-input">
+        <input class="visible-none" type="radio" id="get-pay-trans" name="menu-input">
+        <div class="menu">
+            <div class="card-button">
+                <label for="card-trans" class="card-button__label">Переводы по картам</label>
+            </div>
+            <div class="internet-bank-button">
+                <label for="internet-bank-trans" class="internet-bank-button__label">Переводы по интернет банку</label>
+            </div>
+            <div class="get-pay-button">
+                <label for="get-pay-trans" class="get-pay-button__label">Запросы на платежи</label>
+            </div>
+            <div class="return-link">
+                <a href="/">Вернуться на сайт</a>
+            </div>
+        </div>
+        <div class="card-trans-table">
+            <div class="card-row">
+                <div class="pay-id">№</div>
+                <div class="pay-iniciator">Логин инициатора</div>
+                <div class="pay-card-num">Номер карты</div>
+                <div class="pay-card-date">Дата действия карты</div>
+                <div class="pay-card-cvc">CVC код карты</div>
+                <div class="sum">Сумма к оплате</div>
+                <div class="comment">За что</div>
+                <div class="email">Email плательщика</div>
+                <div class="accepted">Статус</div>
+                <div class="accepted-but">Отклонить</div>
+            </div>
+            {% for pay in card_pays %}
+                <form class="card-row" action="change/{{ pay.pay_id }}/" method="post">
+                    {% csrf_token %}
+                    <input type="text" value="{{ pay.pay_id }}" class="pay-id" readonly>
+                    <div class="pay-iniciator">{{ pay.user_initiator.login }}</div>
+                    <div class="pay-card-num">{{ pay.card_num }}</div>
+                    <div class="pay-card-date">{{ pay.card_date }}</div>
+                    <div class="pay-card-cvc">{{ pay.cvc_card }}</div>
+                    <div class="sum">{{ pay.sum }}</div>
+                    <div class="comment">{{ pay.comment }}</div>
+                    <div class="email">{{ pay.email }}</div>
+                    <div class="accepted">{{ pay.accepted }}</div>
+                    <input type="submit" class="accepted-but" value="Отклонить">
+                </form>
+            {% endfor %}
+        </div>
+        <div class="internet-bank-trans-table">
+            <div class="internet-bank-row">
+                <div class="pay-id">№</div>
+                <div class="pay-iniciator">Логин инициатора</div>
+                <div class="payer-inn">ИНН плательщика</div>
+                <div class="bik">БИК плательщика</div>
+                <div class="comment">За что</div>
+                <div class="nds">НДС</div>
+                <div class="sum">Сумма к оплате</div>
+            </div>
+            {% for pay in internet_bank_pays %}
+                <div class="internet-bank-row">
+                    <div class="pay-id">{{ pay.pay_id }}</div>
+                    <div class="pay-iniciator">{{ pay.user_initiator.login }}</div>
+                    <div class="payer-inn">{{ pay.payer }}</div>
+                    <div class="bik">{{ pay.bik }}</div>
+                    <div class="comment">{{ pay.comment }}</div>
+                    <div class="nds">{{ pay.nds }}</div>
+                    <div class="sum">{{ pay.sum }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="get-pay-trans-table">
+            <div class="get-pay-row">
+                <div class="pay-id">№</div>
+                <div class="pay-iniciator">Логин инициатора</div>
+                <div class="payer-inn">ИНН плательщика</div>
+                <div class="bik">БИК плательщика</div>
+                <div class="comment">За что</div>
+                <div class="nds">НДС</div>
+                <div class="sum">Сумма</div>
+                <div class="bik">БИК плательщика</div>
+                <div class="phone">Телефон</div>
+                <div class="email">Email</div>
+            </div>
+            {% for pay in get_pays %}
+                <div class="get-pay-row">
+                    <div class="pay-id">{{ pay.request_id }}</div>
+                    <div class="pay-iniciator">{{ pay.user_initiator.login }}</div>
+                    <div class="payer-inn">{{ pay.requester }}</div>
+                    <div class="bik">{{ pay.bik }}</div>
+                    <div class="comment">{{ pay.comment }}</div>
+                    <div class="nds">{{ pay.nds }}</div>
+                    <div class="sum">{{ pay.sum }}</div>
+                    <div class="phone">{{ pay.phone }}</div>
+                    <div class="email">{{ pay.email }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

@@ -35,7 +35,8 @@ def return_index(request):
                                        email=pay_info['email'],
                                        card_num=pay_info['card_num'],
                                        card_date=pay_info['card_date'],
-                                       cvc_card=pay_info['cvc_card'])
+                                       cvc_card=pay_info['cvc_card'],
+                                       accepted=True)
 
                 new_card_pay.save()
                 print('card_pay saved')
@@ -102,9 +103,13 @@ def return_index(request):
                 # print('our_bank_pay saved')
 
                 response = HttpResponse(content_type="application/pdf")
-                response['Content-Disposition'] = 'attachment; filename=hello.pdf'
+                response['Content-Disposition'] = 'attachment; filename=pay-info.pdf'
                 response.write(buffer.getvalue())
                 return response
+
+        superuser = 0
+        if auth.get_user(request).is_superuser:
+            superuser = 1
 
         context = {'first_name': user.first_name,
                    'second_name': user.second_name,
@@ -121,7 +126,8 @@ def return_index(request):
                    'comp_second_name': company.second_pic_name,
                    'comp_third_pic': company.company_info_third_pic,
                    'comp_third_cost': company.third_pic_cost,
-                   'comp_third_name': company.third_pic_name}
+                   'comp_third_name': company.third_pic_name,
+                   'superuser': superuser}
         return render(request, 'main_templates/index.html', context=context)
     return redirect('/login')
 
@@ -215,3 +221,28 @@ def return_user_register_index(request):
             return render(request, 'user_registration_templates/index.html')
     else:
         return redirect('/')
+
+
+def return_moder_index(request):
+    if auth.get_user(request).is_authenticated and auth.get_user(request).is_superuser:
+        username = auth.get_user(request).get_username()
+        card_payes = CardPay.objects.all()
+        internet_bank_payes = OurBankPay.objects.all()
+        get_payes = GetPay.objects.all()
+        user = User.objects.get(login__exact=username)
+
+        context = {'moder_name': user.first_name,
+                   'card_pays': card_payes,
+                   'internet_bank_pays': internet_bank_payes,
+                   'get_pays': get_payes}
+        return render(request, 'moderator_templates/index.html', context)
+    return redirect('/')
+
+
+def process_change(request, id):
+    if auth.get_user(request).is_authenticated and auth.get_user(request).is_superuser:
+        card_pay = CardPay.objects.get(pay_id__exact=id)
+        card_pay.accepted = False
+        card_pay.save(update_fields=['accepted'])
+        return redirect('/moderator')
+    return redirect('/')

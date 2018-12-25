@@ -40,6 +40,7 @@ class CardPay(models.Model):
     card_num = models.CharField(max_length=16)
     card_date = models.CharField(max_length=5)
     cvc_card = models.CharField(max_length=3)
+    accepted = models.BooleanField(default=True)
 
 
 class OurBankPay(models.Model):
